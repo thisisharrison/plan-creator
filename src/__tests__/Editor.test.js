@@ -1,7 +1,14 @@
 import React from 'react';
 import {render, screen, act} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {setUpEditor, samplePlan, badPlan} from '../test/utils';
+import {
+  setUpEditor,
+  samplePlan,
+  badJSONPlan,
+  noPricePlan,
+  noPrimaryPlan,
+  noArrayPlan,
+} from '../test/utils';
 import {jsonIfy} from '../utils';
 
 describe('<Editor />', () => {
@@ -19,14 +26,14 @@ describe('<Editor />', () => {
     await userEvent.click(submit);
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith(samplePlan);
-    const newEditor = screen.getByRole('textbox', {name: /editor/i});
+    const newEditor = screen.getByRole('textbox', {name: /input/i});
     const newObj = jsonIfy(newEditor.textContent);
     expect(newObj).toEqual(target);
   });
 
-  test('handles errors and reset errors', async () => {
+  test('handles json errors and reset errors', async () => {
     const [editor, submit, onSubmit] = setUpEditor();
-    userEvent.type(editor, badPlan);
+    userEvent.type(editor, badJSONPlan);
     await act(async () => {
       await userEvent.click(submit);
     });
@@ -37,5 +44,35 @@ describe('<Editor />', () => {
     expect(reset).toBeInTheDocument();
     userEvent.click(reset);
     expect(alert).not.toBeInTheDocument();
+  });
+
+  test('handles missing price error', async () => {
+    const [editor, submit, onSubmit] = setUpEditor();
+    userEvent.type(editor, noPricePlan);
+    await act(async () => {
+      await userEvent.click(submit);
+    });
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('alert')).toHaveTextContent('No price');
+  });
+
+  test('handles missing primary plan error', async () => {
+    const [editor, submit, onSubmit] = setUpEditor();
+    userEvent.type(editor, noPrimaryPlan);
+    await act(async () => {
+      await userEvent.click(submit);
+    });
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('alert')).toHaveTextContent('No primary plan');
+  });
+
+  test('handles missing array', async () => {
+    const [editor, submit, onSubmit] = setUpEditor();
+    userEvent.type(editor, noArrayPlan);
+    await act(async () => {
+      await userEvent.click(submit);
+    });
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('alert')).toHaveTextContent('Wrap object in array');
   });
 });

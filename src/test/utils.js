@@ -6,25 +6,24 @@ import PlanIndex from '../components/Plan/PlanIndex';
 function setUpEditor(options) {
   const onSubmit = jest.fn();
   render(<Editor onSubmit={onSubmit} {...options} />);
-  const editor = screen.getByRole('textbox', {name: /editor/i});
+  const editor = screen.getByRole('textbox', {name: /input/i});
   const submit = screen.getByRole('button', {name: /submit/i});
   return [editor, submit, onSubmit];
 }
 
 function setUpPlan() {
-  render(<PlanIndex />);
+  render(<PlanIndex plans={samplePlan} />);
 }
 
 const samplePlan = `
 [{
   "name": "standard",
   "general": true,
-  "specialist": false,
-  "pythsiotherapy": false,
   "price": 0
 },
 {
   "name": "premium",
+  "primary": true,
   "general": true,
   "specialist": true,
   "pythsiotherapy": true,
@@ -32,11 +31,35 @@ const samplePlan = `
 }]
 `;
 
-const badPlan = `
+const badJSONPlan = `
 {
   "bad apple": true,
   "uh oh"
-
 `;
 
-export {setUpEditor, setUpPlan, samplePlan, badPlan};
+const noPricePlan = `
+[{
+  "name": "bad apple",
+  "primary": true
+}]
+`;
+
+const noPrimaryPlan = `
+[{
+  "name": "bad apple",
+  "price": 10
+}, {
+  "name": "bad orange",
+  "price": 20
+}]
+`;
+
+const noArrayPlan = `
+{
+  "name": "bad apple",
+  "primary": true,
+  "price": 10
+}
+`;
+
+export {setUpEditor, setUpPlan, samplePlan, badJSONPlan, noArrayPlan, noPricePlan, noPrimaryPlan};
