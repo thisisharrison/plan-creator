@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/plan-creator/static/css/main.3752e2cb.chunk.css",
+    "main.js": "/plan-creator/static/js/main.9669bd3b.chunk.js",
+    "main.js.map": "/plan-creator/static/js/main.9669bd3b.chunk.js.map",
+    "runtime-main.js": "/plan-creator/static/js/runtime-main.7a120548.js",
+    "runtime-main.js.map": "/plan-creator/static/js/runtime-main.7a120548.js.map",
+    "static/css/2.62cbf21c.chunk.css": "/plan-creator/static/css/2.62cbf21c.chunk.css",
+    "static/js/2.d74eaaa1.chunk.js": "/plan-creator/static/js/2.d74eaaa1.chunk.js",
+    "static/js/2.d74eaaa1.chunk.js.map": "/plan-creator/static/js/2.d74eaaa1.chunk.js.map",
+    "index.html": "/plan-creator/index.html",
+    "static/css/2.62cbf21c.chunk.css.map": "/plan-creator/static/css/2.62cbf21c.chunk.css.map",
+    "static/css/main.3752e2cb.chunk.css.map": "/plan-creator/static/css/main.3752e2cb.chunk.css.map",
+    "static/js/2.d74eaaa1.chunk.js.LICENSE.txt": "/plan-creator/static/js/2.d74eaaa1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7a120548.js",
+    "static/css/2.62cbf21c.chunk.css",
+    "static/js/2.d74eaaa1.chunk.js",
+    "static/css/main.3752e2cb.chunk.css",
+    "static/js/main.9669bd3b.chunk.js"
+  ]
+}
