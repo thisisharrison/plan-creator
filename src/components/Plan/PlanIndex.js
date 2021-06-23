@@ -1,8 +1,7 @@
 import React from 'react';
-import {prettify} from '../../utils';
 
 export default function PlanIndex({plans, onClick}) {
-  const sortedPlans = JSON.parse(plans).sort((a, b) => (a.primary ? 1 : -1));
+  const sortedPlans = JSON.parse(plans).sort((a, b) => a.price - b.price);
 
   const headers = sortedPlans.map(plan => {
     return (
