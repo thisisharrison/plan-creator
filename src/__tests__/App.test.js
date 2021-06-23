@@ -39,7 +39,7 @@ describe('<App />', () => {
     await act(async () => await userEvent.click(submit));
     headers = screen.queryAllByRole('columnheader');
     expect(headers).toHaveLength(4);
-    expect(headers[1]).toHaveTextContent(/family/i);
+    expect(headers[2]).toHaveTextContent(/family/i);
     const feature = screen.getByRole('cell', {name: /family-specialist-true/i});
     expect(feature).toBeInTheDocument();
     const price = screen.getByRole('cell', {name: /family-price/i});

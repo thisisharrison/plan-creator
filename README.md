@@ -29,6 +29,7 @@ Assumptions:
   support it.
 - Primary plans have all the features that inferior plans have. An inferior plan should not have a
   feature that primary plan does not have.
+- Primary plans have the highest premium. Other plans are to be sorted in-order by price
 
 ```json
 [
