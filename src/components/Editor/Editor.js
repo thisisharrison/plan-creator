@@ -1,7 +1,7 @@
 import React from 'react';
 import {isValidJson} from '../../utils';
 
-function Editor({initialInput = '', onSubmit}) {
+function Editor({initialInput, onSubmit}) {
   const [formState, setFormState] = React.useState(initialInput);
   const [error, setError] = React.useState({});
 
@@ -14,7 +14,9 @@ function Editor({initialInput = '', onSubmit}) {
     try {
       const string = await isValidJson(formState);
       onSubmit(string);
-      if (error.message) setError({});
+      if (error.message) {
+        setError({});
+      }
     } catch (err) {
       setError(err);
     }
@@ -37,6 +39,7 @@ function Editor({initialInput = '', onSubmit}) {
             onChange={handleChange}
             value={formState}
             rows="20"
+            cols="40"
           />
         </label>
         {error.message && <small role="alert">{error.message}</small>}

@@ -7,9 +7,14 @@ import './App.scss';
 
 function App() {
   const [plans, setPlans] = React.useState(initialInput);
+  const [selection, setSelection] = React.useState(null);
 
   const onSubmit = json => {
     setPlans(json);
+  };
+
+  const onClick = plan => {
+    setSelection(plan);
   };
 
   return (
@@ -18,11 +23,16 @@ function App() {
         <h1>Plan Creator</h1>
       </header>
       <main>
-        <Editor intialInput={initialInput} onSubmit={onSubmit} />
+        <Editor initialInput={plans} onSubmit={onSubmit} />
         <div>
           <label>Choose a plan</label>
           <br />
-          {plans ? <PlanIndex plans={plans} /> : null}
+          {selection ? (
+            <p>
+              You have selected the <span className="selected-plan">{selection}</span> plan!
+            </p>
+          ) : null}
+          {plans ? <PlanIndex plans={plans} onClick={onClick} /> : null}
         </div>
       </main>
     </div>

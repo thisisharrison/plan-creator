@@ -1,7 +1,7 @@
 import React from 'react';
 import {prettify} from '../../utils';
 
-export default function PlanIndex({plans}) {
+export default function PlanIndex({plans, onClick}) {
   const sortedPlans = JSON.parse(plans).sort((a, b) => (a.primary ? 1 : -1));
 
   const headers = sortedPlans.map(plan => {
@@ -15,7 +15,7 @@ export default function PlanIndex({plans}) {
   const features = Object.keys(JSON.parse(plans).filter(plan => plan.primary)[0]);
 
   const body = features.map(feature => {
-    if (['name', 'primary', 'price'].includes(feature)) return null;
+    if (['name', 'primary', 'price', 'currency', 'duration'].includes(feature)) return null;
     return (
       <tr key={feature}>
         <th scope="row">{feature}</th>
@@ -36,8 +36,17 @@ export default function PlanIndex({plans}) {
       <th scope="row"></th>
       {sortedPlans.map(plan => (
         <td key={`${plan.name}-price`} title={`${plan.name}-price`}>
-          <input type="checkbox" />
-          {plan.price}
+          <input
+            type="radio"
+            name="select-plan"
+            value={plan.name}
+            id={`${plan.name}-price`}
+            onClick={e => onClick(e.currentTarget.value)}
+          />
+          <label htmlFor={`${plan.name}-price`}>
+            {plan.currency + ' ' + plan.price}{' '}
+            <span className="plan-duration">{plan.duration}</span>
+          </label>
         </td>
       ))}
     </tr>

@@ -29,5 +29,21 @@ main {
   }
   table {
     text-transform: capitalize;
+    label {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+  }
+  .selected-plan {
+    text-transform: capitalize;
+    font-weight: 700;
+  }
+  .plan-duration {
+    text-transform: capitalize;
+    font-size: xx-small;
+    &::before {
+      content: '/';
+    }
   }
 }

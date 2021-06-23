@@ -1,5 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import PlanIndex from '../components/Plan/PlanIndex';
 import {setUpPlan, samplePlan} from '../test/utils';
 
@@ -11,24 +12,27 @@ describe('<PlanIndex />', () => {
     expect(headers[1]).toHaveTextContent(/standard/i);
     expect(headers[2]).toHaveTextContent(/premium/i);
     expect(screen.getByRole('cell', {name: /standard-general-true/i})).toHaveTextContent('✅');
-    expect(screen.getByRole('cell', {name: /standard-pythsiotherapy-false/i})).toHaveTextContent(
+    expect(screen.getByRole('cell', {name: /standard-physiotherapy-false/i})).toHaveTextContent(
       '❌'
     );
     expect(screen.getByRole('cell', {name: /standard-price/i})).toHaveTextContent(/0/i);
     expect(screen.getByRole('cell', {name: /premium-price/i})).toHaveTextContent(/388/i);
   });
 
-  test('update plans on submit', () => {
-    setUpPlan();
+  test('handles plan selection', async () => {
+    const [standard, premium, onClick] = setUpPlan();
+    expect(standard).not.toBeChecked();
+    expect(premium).not.toBeChecked();
+    await userEvent.click(standard);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveBeenCalledWith('standard');
+    expect(standard).toBeChecked();
+    expect(premium).not.toBeChecked();
+    jest.clearAllMocks();
+    await userEvent.click(premium);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveBeenCalledWith('premium');
+    expect(premium).toBeChecked();
+    expect(standard).not.toBeChecked();
   });
-
-  test('restore plan on error', () => {
-    setUpPlan();
-  });
-
-  test('adds new column when new plan is added', () => {
-    setUpPlan();
-  });
-
-  test('handles onSelect', () => {});
 });

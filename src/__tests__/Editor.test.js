@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, screen, act} from '@testing-library/react';
+import {screen, act} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   setUpEditor,
@@ -8,6 +8,8 @@ import {
   noPricePlan,
   noPrimaryPlan,
   noArrayPlan,
+  nonBooleanPlan,
+  noCurrencyDurationPlan,
 } from '../test/utils';
 import {jsonIfy} from '../utils';
 
@@ -53,7 +55,7 @@ describe('<Editor />', () => {
       await userEvent.click(submit);
     });
     expect(onSubmit).toHaveBeenCalledTimes(0);
-    expect(screen.getByRole('alert')).toHaveTextContent('No price');
+    expect(screen.getByRole('alert')).toHaveTextContent('Missing or incorrect price');
   });
 
   test('handles missing primary plan error', async () => {
@@ -74,5 +76,25 @@ describe('<Editor />', () => {
     });
     expect(onSubmit).toHaveBeenCalledTimes(0);
     expect(screen.getByRole('alert')).toHaveTextContent('Wrap object in array');
+  });
+
+  test('handles non boolean value', async () => {
+    const [editor, submit, onSubmit] = setUpEditor();
+    userEvent.type(editor, nonBooleanPlan);
+    await act(async () => {
+      await userEvent.click(submit);
+    });
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('alert')).toHaveTextContent('Plan feature value must be boolean');
+  });
+
+  test('handles missing currency and duration', async () => {
+    const [editor, submit, onSubmit] = setUpEditor();
+    userEvent.type(editor, noCurrencyDurationPlan);
+    await act(async () => {
+      await userEvent.click(submit);
+    });
+    expect(onSubmit).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('alert')).toHaveTextContent('Plans need currency and duration');
   });
 });
