@@ -1,0 +1,49 @@
+h1 {
+  font-weight: 800;
+}
+label {
+  font-size: larger;
+  font-weight: 700;
+}
+main {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  & > form {
+    padding: 0 1rem 0 1rem;
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 1rem;
+    }
+    textarea {
+      font-size: 0.85rem;
+      font-family: monospace;
+    }
+    small {
+      color: red;
+      font-family: monospace;
+    }
+    button {
+      margin-right: 1rem;
+    }
+  }
+  table {
+    text-transform: capitalize;
+    label {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+  }
+  .selected-plan {
+    text-transform: capitalize;
+    font-weight: 700;
+  }
+  .plan-duration {
+    text-transform: capitalize;
+    font-size: xx-small;
+    &::before {
+      content: '/';
+    }
+  }
+}
