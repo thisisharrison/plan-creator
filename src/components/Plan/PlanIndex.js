@@ -66,7 +66,8 @@ export default function PlanIndex({plans, onClick}) {
           {priceCheckbox}
         </tbody>
       </table>
-      <pre>{prettify(plans)}</pre>
+      {/* uncomment to debug */}
+      {/* <pre>{prettify(plans)}</pre> */}
     </>
   );
 }

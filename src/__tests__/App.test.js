@@ -42,7 +42,7 @@ describe('<App />', () => {
     expect(headers[1]).toHaveTextContent(/family/i);
     const feature = screen.getByRole('cell', {name: /family-specialist-true/i});
     expect(feature).toBeInTheDocument();
-    const price = screen.getByRole('cell', {name: /family\-price/i});
+    const price = screen.getByRole('cell', {name: /family-price/i});
     expect(price).toHaveTextContent(288);
   });
 
