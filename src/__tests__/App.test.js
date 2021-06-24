@@ -1,4 +1,3 @@
-import React from 'react';
 import {screen, act} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {setUpApp, samplePlan} from '../test/utils';
@@ -55,12 +54,4 @@ describe('<App />', () => {
     userEvent.click(standard);
     expect(screen.getByText(/you have selected the/i)).toHaveTextContent(/standard/i);
   });
-
-  // test('restore plan on error', () => {
-  //   setUpPlan();
-  // });
-
-  // test('saves input', () => {
-  //   setUpPlan();
-  // });
 });
