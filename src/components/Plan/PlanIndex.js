@@ -35,14 +35,14 @@ export default function PlanIndex({plans, onClick}) {
       <th scope="row"></th>
       {sortedPlans.map(plan => (
         <td key={`${plan.name}-price`} title={`${plan.name}-price`}>
-          <input
-            type="radio"
-            name="select-plan"
-            value={plan.name}
-            id={`${plan.name}-price`}
-            onClick={e => onClick(e.currentTarget.value)}
-          />
           <label htmlFor={`${plan.name}-price`}>
+            <input
+              type="radio"
+              name="select-plan"
+              value={plan.name}
+              id={`${plan.name}-price`}
+              onClick={e => onClick(e.currentTarget.value)}
+            />
             {plan.currency + ' ' + plan.price}{' '}
             <span className="plan-duration">{plan.duration}</span>
           </label>
